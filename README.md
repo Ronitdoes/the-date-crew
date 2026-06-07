@@ -20,6 +20,7 @@
 - [🏗️ Architecture](#architecture)
 - [🛠️ Technology Stack](#technology-stack)
 - [📂 Project Structure](#project-structure)
+- [🧩 System Design](#system-design)
 - [🗄️ Database Schema](#database-schema)
 - [🔌 Backend API Reference](#backend-api-reference)
 - [🧮 Matching Algorithm](#matching-algorithm)
@@ -254,6 +255,156 @@ tdc/
 ├── .env.example                   # Environment variable template
 └── .gitignore
 ```
+
+---
+
+## <a id="system-design"></a>🧩 System Design
+
+```mermaid
+flowchart TB
+    subgraph CLIENT["🖥️ Browser Client"]
+        direction TB
+        NEXTAPP["Next.js 16 App Router"]
+        MIDDLEWARE["Middleware — proxy.ts\nRoute Guards & Redirects"]
+        ZUSTAND["Zustand\nAuth State"]
+        RQ["React Query\nServer State Cache"]
+        AXIOS["Axios\nHTTP Client + Interceptors"]
+        GSAP["GSAP + Framer Motion\nAnimations"]
+    end
+
+    subgraph HOSTING["☁️ Deployment"]
+        VERCEL["Vercel\nFrontend Hosting"]
+        RENDER["Render\nBackend Docker Container"]
+    end
+
+    subgraph API["⚙️ Express API Server"]
+        direction TB
+        ROUTER["Route Layer\n/auth · /customers · /notes · /matches · /ai"]
+
+        subgraph MW["Middleware Pipeline"]
+            AUTH_MW["Auth Middleware\nJWT → Supabase Verify\n→ Matchmaker Resolution"]
+            VALIDATE["Zod Validation\nRequest Body & Params"]
+            RATELIMIT["Rate Limiter\n10 req/min per matchmaker"]
+        end
+
+        subgraph CONTROLLERS["Controllers"]
+            AUTH_C["Auth Controller"]
+            CUST_C["Customer Controller"]
+            NOTES_C["Notes Controller"]
+            MATCH_C["Match Controller"]
+            AI_C["AI Controller"]
+        end
+
+        subgraph SERVICES["Services"]
+            AUTH_S["Auth Service\nSupabase Client"]
+            MATCH_S["Matching Engine\nDeterministic Scoring\nGender-Aware (100 pts)"]
+            AI_S["AI Service\nGemini 3.1 Flash Lite\nLabels + Intro Emails"]
+        end
+
+        CACHE["In-Memory Cache\n5-min TTL\nAuth Profile Lookups"]
+        LOGGER["Winston Logger\nStructured JSON"]
+    end
+
+    subgraph EXTERNAL["🔌 External Services"]
+        GEMINI["Google Gemini AI\ngemini-3.1-flash-lite"]
+        SUPA_AUTH["Supabase Auth\nJWT Issuance & Validation"]
+    end
+
+    subgraph DB["🗄️ PostgreSQL — Supabase"]
+        direction LR
+        DRIZZLE["Drizzle ORM\npostgres.js Driver"]
+        subgraph TABLES["Tables"]
+            T1["matchmakers"]
+            T2["customers"]
+            T3["pool_profiles"]
+            T4["notes"]
+            T5["match_actions"]
+        end
+        RLS["Row-Level Security\nPolicies per matchmaker_id"]
+        PGBOUNCER["PgBouncer\nConnection Pooler :6543"]
+    end
+
+    subgraph CICD["🔄 CI/CD — GitHub Actions"]
+        CI["CI: Typecheck + Lint\nEvery Push & PR"]
+        CD["CD: Docker Build\n→ GHCR Push\n→ Render Deploy Hook"]
+    end
+
+    %% Client internal flow
+    NEXTAPP --> MIDDLEWARE
+    MIDDLEWARE -->|"Session Cookie Check"| SUPA_AUTH
+    NEXTAPP --> ZUSTAND
+    NEXTAPP --> RQ
+    RQ --> AXIOS
+    NEXTAPP --> GSAP
+
+    %% Client to API
+    AXIOS -->|"HTTPS + Bearer JWT"| ROUTER
+
+    %% Hosting
+    VERCEL -.->|"Hosts"| CLIENT
+    RENDER -.->|"Hosts"| API
+
+    %% API internal flow
+    ROUTER --> MW
+    AUTH_MW -->|"Verify Token"| SUPA_AUTH
+    AUTH_MW --> CACHE
+    MW --> CONTROLLERS
+    AUTH_C --> AUTH_S
+    CUST_C --> DRIZZLE
+    NOTES_C --> DRIZZLE
+    MATCH_C --> MATCH_S
+    AI_C --> AI_S
+    MATCH_S --> AI_S
+    MATCH_S --> DRIZZLE
+    AI_S -->|"generateContent()"| GEMINI
+    AI_S --> DRIZZLE
+    AUTH_S --> SUPA_AUTH
+
+    %% DB
+    DRIZZLE --> PGBOUNCER
+    PGBOUNCER --> TABLES
+    RLS -.->|"Enforces"| TABLES
+
+    %% CI/CD
+    CI -.->|"On Push"| API
+    CD -.->|"On Merge to main"| RENDER
+
+    %% Styling
+    classDef client fill:#E8E0F0,stroke:#B99AF5,stroke-width:2px,color:#1A1A1A
+    classDef api fill:#FFF3E0,stroke:#FFB74D,stroke-width:2px,color:#1A1A1A
+    classDef db fill:#E8F5E9,stroke:#66BB6A,stroke-width:2px,color:#1A1A1A
+    classDef external fill:#E3F2FD,stroke:#42A5F5,stroke-width:2px,color:#1A1A1A
+    classDef hosting fill:#FCE4EC,stroke:#EF5350,stroke-width:2px,color:#1A1A1A
+    classDef cicd fill:#F3E5F5,stroke:#AB47BC,stroke-width:2px,color:#1A1A1A
+
+    class CLIENT client
+    class API api
+    class DB db
+    class EXTERNAL external
+    class HOSTING hosting
+    class CICD cicd
+```
+
+### Request Lifecycle
+
+```
+User Action → Next.js Middleware (route guard) → React Query (cache check)
+  → Axios (attach JWT) → Express Router → Auth Middleware (verify JWT)
+  → Zod Validation → Controller → Service Layer
+  → Drizzle ORM → PostgreSQL (RLS enforced)
+  → Response → React Query (cache update) → UI Re-render
+```
+
+### Deployment Topology
+
+| Layer | Platform | Connection |
+|:------|:---------|:-----------|
+| Frontend | **Vercel** | HTTPS → Backend API on Render |
+| Backend | **Render** (Docker) | Drizzle ORM → Supabase PostgreSQL |
+| Database | **Supabase** | PgBouncer pooler on `:6543`, direct on `:5432` |
+| AI | **Google Gemini** | REST API from backend services |
+| Auth | **Supabase Auth** | JWT validation from both frontend middleware & backend |
+| CI/CD | **GitHub Actions** | Typecheck + Lint → Docker Build → GHCR → Render webhook |
 
 ---
 
