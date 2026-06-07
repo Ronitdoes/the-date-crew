@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Outer circle matching soft-purple background & border -->
+  <circle cx="16" cy="16" r="14" fill="#B99AF5" fill-opacity="0.1" stroke="#B99AF5" stroke-opacity="0.2" stroke-width="1.5" />
+  <!-- Heart symbol -->
+  <path d="M16 24.3l-1.4-1.3C9.6 18.5 6 15.2 6 11.2 6 8 8.4 5.6 11.6 5.6c1.8 0 3.5.8 4.6 2.1 1.1-1.3 2.8-2.1 4.6-2.1 3.2 0 5.6 2.4 5.6 5.6 0 4-3.6 7.3-8.6 11.8l-1.4 1.3z" fill="#B99AF5" />
+</svg>

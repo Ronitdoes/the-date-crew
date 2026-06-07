@@ -1,0 +1,961 @@
+{
+  "id": "2c0a6e18-5bea-4ed3-b1db-2eb77ddee735",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "6",
+  "dialect": "postgresql",
+  "tables": {
+    "public.customers": {
+      "name": "customers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "matchmaker_id": {
+          "name": "matchmaker_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gender": {
+          "name": "gender",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date_of_birth": {
+          "name": "date_of_birth",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "profile_photo_url": {
+          "name": "profile_photo_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'India'"
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "height_cm": {
+          "name": "height_cm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weight_kg": {
+          "name": "weight_kg",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "undergrad_college": {
+          "name": "undergrad_college",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "degree": {
+          "name": "degree",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "postgrad_college": {
+          "name": "postgrad_college",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "postgrad_degree": {
+          "name": "postgrad_degree",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_company": {
+          "name": "current_company",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "designation": {
+          "name": "designation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "annual_income_inr": {
+          "name": "annual_income_inr",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "income_tier": {
+          "name": "income_tier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "marital_status": {
+          "name": "marital_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "siblings": {
+          "name": "siblings",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "caste": {
+          "name": "caste",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sub_caste": {
+          "name": "sub_caste",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "religion": {
+          "name": "religion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mother_tongue": {
+          "name": "mother_tongue",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gotra": {
+          "name": "gotra",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "manglik": {
+          "name": "manglik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "horoscope_required": {
+          "name": "horoscope_required",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "diet": {
+          "name": "diet",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "drinking": {
+          "name": "drinking",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "smoking": {
+          "name": "smoking",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "family_type": {
+          "name": "family_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "family_values": {
+          "name": "family_values",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "languages_known": {
+          "name": "languages_known",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "want_kids": {
+          "name": "want_kids",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "open_to_relocate": {
+          "name": "open_to_relocate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "open_to_pets": {
+          "name": "open_to_pets",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "willing_to_settle_abroad": {
+          "name": "willing_to_settle_abroad",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "preferred_age_min": {
+          "name": "preferred_age_min",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preferred_age_max": {
+          "name": "preferred_age_max",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preferred_height_min": {
+          "name": "preferred_height_min",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preferred_religion": {
+          "name": "preferred_religion",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preferred_caste": {
+          "name": "preferred_caste",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "preferred_city": {
+          "name": "preferred_city",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "journey_stage": {
+          "name": "journey_stage",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'onboarding'"
+        },
+        "about_me": {
+          "name": "about_me",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "physically_challenged": {
+          "name": "physically_challenged",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_customers_matchmaker_id": {
+          "name": "idx_customers_matchmaker_id",
+          "columns": [
+            "matchmaker_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "customers_matchmaker_id_matchmakers_id_fk": {
+          "name": "customers_matchmaker_id_matchmakers_id_fk",
+          "tableFrom": "customers",
+          "tableTo": "matchmakers",
+          "columnsFrom": [
+            "matchmaker_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.match_actions": {
+      "name": "match_actions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "customer_id": {
+          "name": "customer_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "pool_profile_id": {
+          "name": "pool_profile_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "matchmaker_id": {
+          "name": "matchmaker_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "algo_score": {
+          "name": "algo_score",
+          "type": "numeric(5, 2)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_label": {
+          "name": "ai_label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_reasoning": {
+          "name": "ai_reasoning",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ai_intro_email": {
+          "name": "ai_intro_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "action": {
+          "name": "action",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'suggested'"
+        },
+        "sent_at": {
+          "name": "sent_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_match_actions_customer": {
+          "name": "idx_match_actions_customer",
+          "columns": [
+            "customer_id"
+          ],
+          "isUnique": false
+        },
+        "idx_match_actions_pool": {
+          "name": "idx_match_actions_pool",
+          "columns": [
+            "pool_profile_id"
+          ],
+          "isUnique": false
+        },
+        "idx_match_actions_matchmaker": {
+          "name": "idx_match_actions_matchmaker",
+          "columns": [
+            "matchmaker_id"
+          ],
+          "isUnique": false
+        },
+        "idx_match_actions_action": {
+          "name": "idx_match_actions_action",
+          "columns": [
+            "action"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "match_actions_customer_id_customers_id_fk": {
+          "name": "match_actions_customer_id_customers_id_fk",
+          "tableFrom": "match_actions",
+          "tableTo": "customers",
+          "columnsFrom": [
+            "customer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "match_actions_pool_profile_id_pool_profiles_id_fk": {
+          "name": "match_actions_pool_profile_id_pool_profiles_id_fk",
+          "tableFrom": "match_actions",
+          "tableTo": "pool_profiles",
+          "columnsFrom": [
+            "pool_profile_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "match_actions_matchmaker_id_matchmakers_id_fk": {
+          "name": "match_actions_matchmaker_id_matchmakers_id_fk",
+          "tableFrom": "match_actions",
+          "tableTo": "matchmakers",
+          "columnsFrom": [
+            "matchmaker_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "match_actions_customer_id_pool_profile_id_unique": {
+          "name": "match_actions_customer_id_pool_profile_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "customer_id",
+            "pool_profile_id"
+          ]
+        }
+      }
+    },
+    "public.matchmakers": {
+      "name": "matchmakers",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "auth_id": {
+          "name": "auth_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "full_name": {
+          "name": "full_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_matchmakers_auth_id": {
+          "name": "idx_matchmakers_auth_id",
+          "columns": [
+            "auth_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "matchmakers_auth_id_unique": {
+          "name": "matchmakers_auth_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "auth_id"
+          ]
+        },
+        "matchmakers_email_unique": {
+          "name": "matchmakers_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
+    },
+    "public.notes": {
+      "name": "notes",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "customer_id": {
+          "name": "customer_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "matchmaker_id": {
+          "name": "matchmaker_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "note_type": {
+          "name": "note_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'general'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_notes_customer_id": {
+          "name": "idx_notes_customer_id",
+          "columns": [
+            "customer_id"
+          ],
+          "isUnique": false
+        },
+        "idx_notes_matchmaker_id": {
+          "name": "idx_notes_matchmaker_id",
+          "columns": [
+            "matchmaker_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "notes_customer_id_customers_id_fk": {
+          "name": "notes_customer_id_customers_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "customers",
+          "columnsFrom": [
+            "customer_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "notes_matchmaker_id_matchmakers_id_fk": {
+          "name": "notes_matchmaker_id_matchmakers_id_fk",
+          "tableFrom": "notes",
+          "tableTo": "matchmakers",
+          "columnsFrom": [
+            "matchmaker_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.pool_profiles": {
+      "name": "pool_profiles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "gender": {
+          "name": "gender",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date_of_birth": {
+          "name": "date_of_birth",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "profile_photo_url": {
+          "name": "profile_photo_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "country": {
+          "name": "country",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'India'"
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "height_cm": {
+          "name": "height_cm",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weight_kg": {
+          "name": "weight_kg",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "undergrad_college": {
+          "name": "undergrad_college",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "degree": {
+          "name": "degree",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_company": {
+          "name": "current_company",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "designation": {
+          "name": "designation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "annual_income_inr": {
+          "name": "annual_income_inr",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "income_tier": {
+          "name": "income_tier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "marital_status": {
+          "name": "marital_status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "siblings": {
+          "name": "siblings",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 0
+        },
+        "caste": {
+          "name": "caste",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sub_caste": {
+          "name": "sub_caste",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "religion": {
+          "name": "religion",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mother_tongue": {
+          "name": "mother_tongue",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "gotra": {
+          "name": "gotra",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "manglik": {
+          "name": "manglik",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "horoscope_required": {
+          "name": "horoscope_required",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "diet": {
+          "name": "diet",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "drinking": {
+          "name": "drinking",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "smoking": {
+          "name": "smoking",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "family_type": {
+          "name": "family_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "family_values": {
+          "name": "family_values",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "languages_known": {
+          "name": "languages_known",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "want_kids": {
+          "name": "want_kids",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "open_to_relocate": {
+          "name": "open_to_relocate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "open_to_pets": {
+          "name": "open_to_pets",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "about_me": {
+          "name": "about_me",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "physically_challenged": {
+          "name": "physically_challenged",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "is_active": {
+          "name": "is_active",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "idx_pool_gender": {
+          "name": "idx_pool_gender",
+          "columns": [
+            "gender"
+          ],
+          "isUnique": false
+        },
+        "idx_pool_active": {
+          "name": "idx_pool_active",
+          "columns": [
+            "is_active"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

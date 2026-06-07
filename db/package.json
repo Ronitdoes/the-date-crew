@@ -1,0 +1,23 @@
+{
+  "name": "db",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:migrate-prod": "node ../app/backend/dist/db/migrate.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.30.10",
+    "postgres": "^3.4.4"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "@types/node": "^20.12.12",
+    "drizzle-kit": "^0.21.4",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.5"
+  }
+}

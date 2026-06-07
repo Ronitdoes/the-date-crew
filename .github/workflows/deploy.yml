@@ -1,0 +1,46 @@
+name: Deploy to Production
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  test:
+    name: Run CI tests
+    uses: ./.github/workflows/ci.yml
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lowercase repository name
+        id: prep
+        run: |
+          echo "repo_lower=${GITHUB_REPOSITORY,,}" >> $GITHUB_OUTPUT
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push backend image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: app/backend/Dockerfile
+          push: true
+          tags: ghcr.io/${{ steps.prep.outputs.repo_lower }}/backend:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    env:
+      RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_BACKEND }}
+    steps:
+      - name: Trigger Render backend deploy
+        if: env.RENDER_DEPLOY_HOOK != ''
+        run: curl -fsS "$RENDER_DEPLOY_HOOK"

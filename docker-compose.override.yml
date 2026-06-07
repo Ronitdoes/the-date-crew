@@ -1,0 +1,3 @@
+services:
+  backend:
+    command: npx tsx watch app/backend/src/index.ts
