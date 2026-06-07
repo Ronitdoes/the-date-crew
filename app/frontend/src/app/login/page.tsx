@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
@@ -22,13 +22,6 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const { isLoggingOut, setLoggingOut } = useAuthStore();
-
-  useEffect(() => {
-    if (isLoggingOut) {
-      setLoggingOut(false);
-    }
-  }, [isLoggingOut, setLoggingOut]);
 
   useGSAP(() => {
     // Form elements stagger entry reveal

@@ -9,6 +9,10 @@ interface PreloaderProps {
 }
 
 export default function Preloader({ hydrated, onComplete }: PreloaderProps) {
+  // Stable ref for onComplete to prevent exit animation from being reverted
+  // when parent re-renders with a new inline callback
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
   const containerRef = useRef<HTMLDivElement>(null);
   const heartRef = useRef<HTMLDivElement>(null);
   const wordmarkRef = useRef<HTMLSpanElement>(null);
@@ -47,9 +51,7 @@ export default function Preloader({ hydrated, onComplete }: PreloaderProps) {
     const ctx = gsap.context(() => {
       const exitTl = gsap.timeline({
         onComplete: () => {
-          if (onComplete) {
-            onComplete();
-          }
+          onCompleteRef.current?.();
         },
       });
 
@@ -88,7 +90,7 @@ export default function Preloader({ hydrated, onComplete }: PreloaderProps) {
     }, containerRef);
 
     return () => ctx.revert();
-  }, [hydrated, onComplete]);
+  }, [hydrated]);
 
   return (
     <div

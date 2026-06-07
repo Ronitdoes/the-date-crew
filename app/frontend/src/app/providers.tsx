@@ -1,7 +1,7 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState, useEffect, useCallback } from "react";
 import { supabase } from "@/lib/supabase";
 import { api } from "@/lib/api";
 import { useAuthStore } from "@/store/authStore";
@@ -11,11 +11,21 @@ import Preloader from "@/components/preloader";
 function SessionHydrator({ children }: { children: ReactNode }) {
   const [hydrated, setHydrated] = useState(false);
   const [preloaderComplete, setPreloaderComplete] = useState(false);
-  const { setAuth, clearAuth, isLoggingOut } = useAuthStore();
+  const [logoutReady, setLogoutReady] = useState(false);
+  const { setAuth, clearAuth, isLoggingOut, setLoggingOut } = useAuthStore();
 
+  // When logging out, show preloader with intro animation, then after a delay
+  // trigger the exit animation to reveal the login page underneath
   useEffect(() => {
     if (isLoggingOut) {
       setPreloaderComplete(false);
+      setLogoutReady(false);
+      // Wait for the preloader intro animation to play (1.2s),
+      // then signal the exit animation to begin
+      const timer = setTimeout(() => {
+        setLogoutReady(true);
+      }, 1200);
+      return () => clearTimeout(timer);
     }
   }, [isLoggingOut]);
 
@@ -73,16 +83,26 @@ function SessionHydrator({ children }: { children: ReactNode }) {
     };
   }, [setAuth, clearAuth]);
 
+  // Determine preloader hydrated prop:
+  // - Normal load: pass through `hydrated` so preloader exits once session is resolved
+  // - Logout: pass `logoutReady` so preloader exits after the intro delay
+  const preloaderHydrated = isLoggingOut ? logoutReady : hydrated;
+
+  const handlePreloaderComplete = useCallback(() => {
+    if (isLoggingOut) {
+      // Logout transition complete — clear the flag so the app returns to normal
+      setLoggingOut(false);
+      setLogoutReady(false);
+    }
+    setPreloaderComplete(true);
+  }, [isLoggingOut, setLoggingOut]);
+
   return (
     <>
       {(!preloaderComplete || isLoggingOut) && (
         <Preloader
-          hydrated={!isLoggingOut && hydrated}
-          onComplete={() => {
-            if (!isLoggingOut) {
-              setPreloaderComplete(true);
-            }
-          }}
+          hydrated={preloaderHydrated}
+          onComplete={handlePreloaderComplete}
         />
       )}
       {hydrated && children}
