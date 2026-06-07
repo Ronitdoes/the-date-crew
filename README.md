@@ -38,7 +38,7 @@
 
 ---
 
-## 🔍 Overview
+## <a id="overview"></a>🔍 Overview
 
 The Date Crew (TDC) Matchmaker Dashboard is a full-stack monorepo application designed for professional matchmakers operating in the Indian matrimonial space. The system enables matchmakers to:
 
@@ -51,7 +51,7 @@ The Date Crew (TDC) Matchmaker Dashboard is a full-stack monorepo application de
 
 ---
 
-## 🏗️ Architecture
+## <a id="architecture"></a>🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -98,7 +98,7 @@ The Date Crew (TDC) Matchmaker Dashboard is a full-stack monorepo application de
 
 ---
 
-## 🛠️ Technology Stack
+## <a id="technology-stack"></a>🛠️ Technology Stack
 
 ### Workspace & Tooling
 | Tool | Version | Purpose |
@@ -145,7 +145,7 @@ The Date Crew (TDC) Matchmaker Dashboard is a full-stack monorepo application de
 
 ---
 
-## 📂 Project Structure
+## <a id="project-structure"></a>📂 Project Structure
 
 ```
 tdc/
@@ -257,7 +257,7 @@ tdc/
 
 ---
 
-## 🗄️ Database Schema
+## <a id="database-schema"></a>🗄️ Database Schema
 
 The database consists of 5 tables with full referential integrity, composite indexes, and `CHECK` constraints for enum-like columns.
 
@@ -358,7 +358,7 @@ RLS policies are defined in `db/seeds/apply_rls.ts` and enforce that authenticat
 
 ---
 
-## 🔌 Backend API Reference
+## <a id="backend-api-reference"></a>🔌 Backend API Reference
 
 All routes are prefixed with `/api/v1`. Protected routes require a `Bearer <token>` header. Responses follow a consistent envelope:
 
@@ -417,7 +417,7 @@ All routes are prefixed with `/api/v1`. Protected routes require a `Bearer <toke
 
 ---
 
-## 🧮 Matching Algorithm
+## <a id="matching-algorithm"></a>🧮 Matching Algorithm
 
 The matching engine (`app/backend/src/services/matching.service.ts`) implements a **gender-aware, deterministic scoring system** with AI enrichment.
 
@@ -473,7 +473,7 @@ If Gemini API fails, the system generates deterministic fallback reasoning by ev
 
 ---
 
-## 🧠 AI Integration
+## <a id="ai-integration"></a>🧠 AI Integration
 
 The application integrates Google Gemini (`gemini-3.1-flash-lite`) for two capabilities:
 
@@ -508,7 +508,7 @@ All AI endpoints are protected by `express-rate-limit`:
 
 ---
 
-## 🎨 Frontend Architecture
+## <a id="frontend-architecture"></a>🎨 Frontend Architecture
 
 ### Design System
 
@@ -559,7 +559,7 @@ The frontend uses a **custom Tailwind v4 theme** with semantic design tokens def
 
 ---
 
-## 🔐 Authentication Flow
+## <a id="authentication-flow"></a>🔐 Authentication Flow
 
 ```
 ┌──────────┐     POST /auth/login      ┌────────────┐    signInWithPassword    ┌──────────┐
@@ -599,7 +599,7 @@ The `SessionHydrator` component in `providers.tsx`:
 
 ---
 
-## 🚀 Getting Started
+## <a id="getting-started"></a>🚀 Getting Started
 
 ### Prerequisites
 
@@ -639,7 +639,7 @@ pnpm dev:frontend   # Next.js on http://localhost:3000
 
 ---
 
-## ⚙️ Environment Variables
+## <a id="environment-variables"></a>⚙️ Environment Variables
 
 Create a `.env` file at the project root. All workspace packages resolve this file via relative path imports.
 
@@ -679,7 +679,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
 
 ---
 
-## 💾 Database Setup & Seeding
+## <a id="database-setup--seeding"></a>💾 Database Setup & Seeding
 
 ### Schema Management (Drizzle Kit)
 
@@ -725,7 +725,7 @@ The migration script (`db/migrate.ts`) dynamically resolves the migrations folde
 
 ---
 
-## 💻 Running Locally
+## <a id="running-locally"></a>💻 Running Locally
 
 ### Individual Services
 
@@ -756,7 +756,7 @@ pnpm build:frontend     # next build
 
 ---
 
-## 🧪 Testing
+## <a id="testing"></a>🧪 Testing
 
 The backend includes both unit and integration tests using Jest + Supertest:
 
@@ -781,7 +781,7 @@ Jest runs with `ts-jest` preset, `forceExit: true`, and full mock cleanup betwee
 
 ---
 
-## 🐳 Docker
+## <a id="docker"></a>🐳 Docker
 
 ### Backend Container
 
@@ -806,7 +806,7 @@ The compose file passes through all required env vars from the host `.env`:
 
 ---
 
-## 🔄 CI/CD Pipeline
+## <a id="cicd-pipeline"></a>🔄 CI/CD Pipeline
 
 ### CI (`ci.yml`)
 
@@ -834,7 +834,7 @@ Triggers on **push to `main` branch**:
 
 ---
 
-## 🌐 Deployment
+## <a id="deployment"></a>🌐 Deployment
 
 ### Production Architecture
 
@@ -857,6 +857,6 @@ Triggers on **push to `main` branch**:
 
 ---
 
-## 📄 License
+## <a id="license"></a>📄 License
 
 This project is private and proprietary.
