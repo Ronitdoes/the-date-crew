@@ -1,7 +1,8 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactNode, useState, useEffect, useCallback } from "react";
+import { ReactNode, useState, useEffect, useCallback, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import { api } from "@/lib/api";
 import { useAuthStore } from "@/store/authStore";
@@ -13,21 +14,34 @@ function SessionHydrator({ children }: { children: ReactNode }) {
   const [preloaderComplete, setPreloaderComplete] = useState(false);
   const [logoutReady, setLogoutReady] = useState(false);
   const { setAuth, clearAuth, isLoggingOut, setLoggingOut } = useAuthStore();
+  const pathname = usePathname();
+  const logoutStartTimeRef = useRef<number | null>(null);
 
-  // When logging out, show preloader with intro animation, then after a delay
-  // trigger the exit animation to reveal the login page underneath
+  // When logging out, show preloader with intro animation, then after we have routed
+  // to the login page, trigger the exit animation to reveal the login page underneath.
   useEffect(() => {
     if (isLoggingOut) {
-      setPreloaderComplete(false);
-      setLogoutReady(false);
-      // Wait for the preloader intro animation to play (1.2s),
-      // then signal the exit animation to begin
-      const timer = setTimeout(() => {
-        setLogoutReady(true);
-      }, 1200);
-      return () => clearTimeout(timer);
+      if (!logoutStartTimeRef.current) {
+        logoutStartTimeRef.current = Date.now();
+        setPreloaderComplete(false);
+        setLogoutReady(false);
+      }
+
+      if (pathname === "/login") {
+        // Ensure the preloader intro plays for at least 1.2s to look premium and natural
+        const elapsed = Date.now() - (logoutStartTimeRef.current || Date.now());
+        const delay = Math.max(200, 1200 - elapsed); // at least 200ms delay to make sure rendering is complete
+
+        const timer = setTimeout(() => {
+          setLogoutReady(true);
+          logoutStartTimeRef.current = null; // reset
+        }, delay);
+        return () => clearTimeout(timer);
+      }
+    } else {
+      logoutStartTimeRef.current = null;
     }
-  }, [isLoggingOut]);
+  }, [isLoggingOut, pathname]);
 
   useEffect(() => {
     let active = true;
