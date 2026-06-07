@@ -369,20 +369,6 @@ flowchart TB
     CI -.->|"On Push"| API
     CD -.->|"On Merge to main"| RENDER
 
-    %% Styling
-    classDef client fill:#E8E0F0,stroke:#B99AF5,stroke-width:2px,color:#1A1A1A
-    classDef api fill:#FFF3E0,stroke:#FFB74D,stroke-width:2px,color:#1A1A1A
-    classDef db fill:#E8F5E9,stroke:#66BB6A,stroke-width:2px,color:#1A1A1A
-    classDef external fill:#E3F2FD,stroke:#42A5F5,stroke-width:2px,color:#1A1A1A
-    classDef hosting fill:#FCE4EC,stroke:#EF5350,stroke-width:2px,color:#1A1A1A
-    classDef cicd fill:#F3E5F5,stroke:#AB47BC,stroke-width:2px,color:#1A1A1A
-
-    class CLIENT client
-    class API api
-    class DB db
-    class EXTERNAL external
-    class HOSTING hosting
-    class CICD cicd
 ```
 
 ### Request Lifecycle
