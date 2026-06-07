@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/Express-4.x-000000?logo=express&logoColor=white" />
-  <img src="https://img.shields.io/badge/TypeScript-5.4-3178C6?logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/PostgreSQL-Supabase-3ECF8E?logo=supabase&logoColor=white" />
-  <img src="https://img.shields.io/badge/Drizzle_ORM-0.30-C5F74F?logo=drizzle&logoColor=black" />
-  <img src="https://img.shields.io/badge/Gemini_AI-3.1-4285F4?logo=google&logoColor=white" />
-  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker&logoColor=white" />
+  <a href="https://nextjs.org"><img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" /></a>
+  <a href="https://expressjs.com"><img src="https://img.shields.io/badge/Express-4.x-black?style=for-the-badge&logo=express&logoColor=white" alt="Express" /></a>
+  <a href="https://www.typescriptlang.org"><img src="https://img.shields.io/badge/TypeScript-5.4-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+  <a href="https://supabase.com"><img src="https://img.shields.io/badge/PostgreSQL_%26_Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" /></a>
+  <a href="https://orm.drizzle.team"><img src="https://img.shields.io/badge/Drizzle_ORM-0.30-C5F74F?style=for-the-badge&logo=drizzle&logoColor=black" alt="Drizzle ORM" /></a>
+  <a href="https://deepmind.google/technologies/gemini/"><img src="https://img.shields.io/badge/Gemini_AI-3.1-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Gemini AI" /></a>
+  <a href="https://www.docker.com"><img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" /></a>
 </p>
 
 # The Date Crew — Matchmaker Dashboard
@@ -14,31 +14,31 @@
 
 ---
 
-## Table of Contents
+## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Database Schema](#database-schema)
-- [Backend API Reference](#backend-api-reference)
-- [Matching Algorithm](#matching-algorithm)
-- [AI Integration](#ai-integration)
-- [Frontend Architecture](#frontend-architecture)
-- [Authentication Flow](#authentication-flow)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [Database Setup & Seeding](#database-setup--seeding)
-- [Running Locally](#running-locally)
-- [Testing](#testing)
-- [Docker](#docker)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Deployment](#deployment)
-- [License](#license)
+- [🔍 Overview](#overview)
+- [🏗️ Architecture](#architecture)
+- [🛠️ Technology Stack](#technology-stack)
+- [📂 Project Structure](#project-structure)
+- [🗄️ Database Schema](#database-schema)
+- [🔌 Backend API Reference](#backend-api-reference)
+- [🧮 Matching Algorithm](#matching-algorithm)
+- [🧠 AI Integration](#ai-integration)
+- [🎨 Frontend Architecture](#frontend-architecture)
+- [🔐 Authentication Flow](#authentication-flow)
+- [🚀 Getting Started](#getting-started)
+- [⚙️ Environment Variables](#environment-variables)
+- [💾 Database Setup & Seeding](#database-setup--seeding)
+- [💻 Running Locally](#running-locally)
+- [🧪 Testing](#testing)
+- [🐳 Docker](#docker)
+- [🔄 CI/CD Pipeline](#cicd-pipeline)
+- [🌐 Deployment](#deployment)
+- [📄 License](#license)
 
 ---
 
-## Overview
+## 🔍 Overview
 
 The Date Crew (TDC) Matchmaker Dashboard is a full-stack monorepo application designed for professional matchmakers operating in the Indian matrimonial space. The system enables matchmakers to:
 
@@ -51,7 +51,7 @@ The Date Crew (TDC) Matchmaker Dashboard is a full-stack monorepo application de
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -98,7 +98,7 @@ The Date Crew (TDC) Matchmaker Dashboard is a full-stack monorepo application de
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 ### Workspace & Tooling
 | Tool | Version | Purpose |
@@ -145,7 +145,7 @@ The Date Crew (TDC) Matchmaker Dashboard is a full-stack monorepo application de
 
 ---
 
-## Project Structure
+## 📂 Project Structure
 
 ```
 tdc/
@@ -257,7 +257,7 @@ tdc/
 
 ---
 
-## Database Schema
+## 🗄️ Database Schema
 
 The database consists of 5 tables with full referential integrity, composite indexes, and `CHECK` constraints for enum-like columns.
 
@@ -358,7 +358,7 @@ RLS policies are defined in `db/seeds/apply_rls.ts` and enforce that authenticat
 
 ---
 
-## Backend API Reference
+## 🔌 Backend API Reference
 
 All routes are prefixed with `/api/v1`. Protected routes require a `Bearer <token>` header. Responses follow a consistent envelope:
 
@@ -417,7 +417,7 @@ All routes are prefixed with `/api/v1`. Protected routes require a `Bearer <toke
 
 ---
 
-## Matching Algorithm
+## 🧮 Matching Algorithm
 
 The matching engine (`app/backend/src/services/matching.service.ts`) implements a **gender-aware, deterministic scoring system** with AI enrichment.
 
@@ -473,7 +473,7 @@ If Gemini API fails, the system generates deterministic fallback reasoning by ev
 
 ---
 
-## AI Integration
+## 🧠 AI Integration
 
 The application integrates Google Gemini (`gemini-3.1-flash-lite`) for two capabilities:
 
@@ -508,7 +508,7 @@ All AI endpoints are protected by `express-rate-limit`:
 
 ---
 
-## Frontend Architecture
+## 🎨 Frontend Architecture
 
 ### Design System
 
@@ -559,7 +559,7 @@ The frontend uses a **custom Tailwind v4 theme** with semantic design tokens def
 
 ---
 
-## Authentication Flow
+## 🔐 Authentication Flow
 
 ```
 ┌──────────┐     POST /auth/login      ┌────────────┐    signInWithPassword    ┌──────────┐
@@ -599,7 +599,7 @@ The `SessionHydrator` component in `providers.tsx`:
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -639,7 +639,7 @@ pnpm dev:frontend   # Next.js on http://localhost:3000
 
 ---
 
-## Environment Variables
+## ⚙️ Environment Variables
 
 Create a `.env` file at the project root. All workspace packages resolve this file via relative path imports.
 
@@ -679,7 +679,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY="your-supabase-anon-key"
 
 ---
 
-## Database Setup & Seeding
+## 💾 Database Setup & Seeding
 
 ### Schema Management (Drizzle Kit)
 
@@ -725,7 +725,7 @@ The migration script (`db/migrate.ts`) dynamically resolves the migrations folde
 
 ---
 
-## Running Locally
+## 💻 Running Locally
 
 ### Individual Services
 
@@ -756,7 +756,7 @@ pnpm build:frontend     # next build
 
 ---
 
-## Testing
+## 🧪 Testing
 
 The backend includes both unit and integration tests using Jest + Supertest:
 
@@ -781,7 +781,7 @@ Jest runs with `ts-jest` preset, `forceExit: true`, and full mock cleanup betwee
 
 ---
 
-## Docker
+## 🐳 Docker
 
 ### Backend Container
 
@@ -806,7 +806,7 @@ The compose file passes through all required env vars from the host `.env`:
 
 ---
 
-## CI/CD Pipeline
+## 🔄 CI/CD Pipeline
 
 ### CI (`ci.yml`)
 
@@ -834,7 +834,7 @@ Triggers on **push to `main` branch**:
 
 ---
 
-## Deployment
+## 🌐 Deployment
 
 ### Production Architecture
 
@@ -857,6 +857,6 @@ Triggers on **push to `main` branch**:
 
 ---
 
-## License
+## 📄 License
 
 This project is private and proprietary.
