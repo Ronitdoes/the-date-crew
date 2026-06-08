@@ -418,10 +418,19 @@ export default function Hero() {
       ref={containerRef}
       className="relative w-full min-h-screen flex items-center justify-center bg-[#9da1fc] overflow-hidden select-none"
     >
-      {/* Background Image Layer (Parallax responsive) */}
+      {/* Background Image Layer — Mobile (heroMobile.avif) */}
       <div
         ref={bgRef}
-        className="absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none select-none scale-[1.03]"
+        className="md:hidden absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none select-none scale-[1.03]"
+        style={{
+          backgroundImage: "url('/heroMobile.avif')",
+          willChange: "transform",
+        }}
+      />
+
+      {/* Background Image Layer — Desktop (hero.avif) */}
+      <div
+        className="hidden md:block absolute inset-0 w-full h-full bg-cover bg-center pointer-events-none select-none scale-[1.03]"
         style={{
           backgroundImage: "url('/hero.avif')",
           willChange: "transform",
